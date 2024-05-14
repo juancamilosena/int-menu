@@ -13,10 +13,17 @@ return new class extends Migration
     {
         Schema::create('ordens', function (Blueprint $table) {
             $table->id();
-            $table-> boolean("estado");
+
+            $table->string("estado");
             $table->timestamps();
             //foraneas
             $table->unsignedBigInteger('mesa_id')->nullable();
+
+            $table->foreign('mesa_id')
+            ->references('id')
+            ->on('mesas')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
         });
     }
 
